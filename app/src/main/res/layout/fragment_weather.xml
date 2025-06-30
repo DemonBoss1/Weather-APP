@@ -26,7 +26,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_location"
-                android:tint="@color/white" />
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/tvLocation"
@@ -114,7 +114,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     tools:src="@drawable/ic_humidity" />
 
                 <TextView
@@ -147,7 +147,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     tools:src="@drawable/ic_wind" />
 
                 <TextView
@@ -180,7 +180,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     tools:src="@drawable/ic_pressure" />
 
                 <TextView
@@ -213,7 +213,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:tint="@color/white"
+                    app:tint="@color/white"
                     tools:src="@drawable/ic_uv" />
 
                 <TextView
