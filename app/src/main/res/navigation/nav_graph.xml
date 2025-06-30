@@ -8,14 +8,14 @@
     <!-- Главный экран с погодой -->
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.empire_mammoth.weatherapp.WeatherFragment"
+        android:name="com.empire_mammoth.weatherapp.presentation.ui.weather.WeatherFragment"
         android:label="Погода"
         tools:layout="@layout/fragment_weather" />
 
     <!-- Список городов -->
     <fragment
         android:id="@+id/citiesFragment"
-        android:name="com.empire_mammoth.weatherapp.CitiesFragment"
+        android:name="com.empire_mammoth.weatherapp.presentation.ui.cities.CitiesFragment"
         android:label="Города"
         tools:layout="@layout/fragment_cities" />
 

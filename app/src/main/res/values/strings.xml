@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Weather APP</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="uv_index">UV Index</string>
+    <string name="visibility">Visibility</string>
+    <string name="cloud_cover">Cloud Cover</string>
+    <string name="forecast">3-Day Forecast</string>
+    <string name="hourly_forecast">Hourly Forecast</string>
+    <string name="sun_moon"><![CDATA[Sun & Moon]]></string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="moon_phase">Moon Phase</string>
+    <string name="moonrise">Moonrise</string>
 </resources>
