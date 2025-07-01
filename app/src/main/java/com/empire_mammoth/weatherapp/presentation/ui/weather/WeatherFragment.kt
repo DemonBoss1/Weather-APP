@@ -36,7 +36,13 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Наблюдаем за изменениями в ViewModel
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        }
         viewModel.weatherData.observe(viewLifecycleOwner) { response ->
             response?.let { updateUI(it) }
         }
@@ -165,5 +171,15 @@ class WeatherFragment : Fragment() {
             uv < 11 -> "Very High"
             else -> "Extreme"
         }
+    }
+
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.scrollView.visibility = View.GONE
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.scrollView.visibility = View.VISIBLE
     }
 }

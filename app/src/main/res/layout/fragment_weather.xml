@@ -1,576 +1,592 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_blue"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient_blue"
+        android:fillViewport="true"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-        <!-- Секция с местоположением -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_location"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="London, United Kingdom" />
-
-            <TextView
-                android:id="@+id/tvRegion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/white_alpha_80"
-                android:textSize="14sp"
-                tools:text="City of London, Greater London" />
-        </LinearLayout>
-
-        <!-- Секция текущей погоды -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <TextView
-                android:id="@+id/tvDateTime"
+            <!-- Секция с местоположением -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white_alpha_80"
-                android:textSize="14sp"
-                tools:text="June 30, 1:25 PM | Last updated: 1:15 PM" />
-
-            <ImageView
-                android:id="@+id/ivWeatherIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginVertical="8dp"
-                tools:src="@drawable/ic_sunny" />
-
-            <TextView
-                android:id="@+id/tvTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="72sp"
-                android:textStyle="bold"
-                tools:text="30°C | 86°F" />
-
-            <!-- Условия (ясно, облачно и т.д.) -->
-            <TextView
-                android:id="@+id/tvCondition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                tools:text="Partly cloudy" />
-
-            <!-- Ощущается как -->
-            <TextView
-                android:id="@+id/tvFeelsLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white_alpha_80"
-                android:textSize="14sp"
-                tools:text="Feels like 29°C | 84°F" />
-        </LinearLayout>
-
-        <!-- Сетка с деталями погоды -->
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:columnOrderPreserved="false"
-            android:rowCount="5"
-            android:useDefaultMargins="true">
-
-            <!-- Влажность -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_humidity"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvHumidity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="43%" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/humidity"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Ветер -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_wind"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvWind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="13 km/h S (178°)" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/wind"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Давление -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_pressure"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvPressure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="1018 hPa | 30.06 in" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pressure"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- УФ-индекс -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_uv"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvUV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="8.6 (Very High)" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/uv_index"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Видимость -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_visibility"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvVisibility"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="10 km | 6 miles" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/visibility"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Облачность -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_cloud"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvCloud"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="50%" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cloud_cover"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </GridLayout>
-
-        <!-- Заголовок прогноза на 3 дня -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/forecast"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- Контейнер прогноза на 3 дня -->
-        <LinearLayout
-            android:id="@+id/forecastContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical">
-
-            <!-- Today -->
-            <include
-                android:id="@+id/forecastToday"
-                layout="@layout/item_forecast_day"
-                tools:srcIcon="@drawable/ic_sunny_small"
-                tools:textDate="Today, June 30"
-                tools:textTemp="33° / 18°" />
-
-            <!-- Tomorrow -->
-            <include
-                android:id="@+id/forecastTomorrow"
-                layout="@layout/item_forecast_day"
-                tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                tools:textDate="Tomorrow, July 1"
-                tools:textTemp="33° / 20°" />
-
-            <!-- Day After -->
-            <include
-                android:id="@+id/forecastDayAfter"
-                layout="@layout/item_forecast_day"
-                tools:srcIcon="@drawable/ic_rain_small"
-                tools:textDate="Wed, July 2"
-                tools:textTemp="22° / 14°" />
-        </LinearLayout>
-
-        <!-- Заголовок почасового прогноза -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/hourly_forecast"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-
-            <LinearLayout
-                android:id="@+id/hourlyForecastContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <include
-                    layout="@layout/item_hourly_forecast"
-                    tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                    tools:textHour="Now"
-                    tools:textTemp="30°" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/white" />
 
-                <include
-                    layout="@layout/item_hourly_forecast"
-                    tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                    tools:textHour="14"
-                    tools:textTemp="31°" />
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="London, United Kingdom" />
 
+                <TextView
+                    android:id="@+id/tvRegion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/white_alpha_80"
+                    android:textSize="14sp"
+                    tools:text="City of London, Greater London" />
+            </LinearLayout>
+
+            <!-- Секция текущей погоды -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_alpha_80"
+                    android:textSize="14sp"
+                    tools:text="June 30, 1:25 PM | Last updated: 1:15 PM" />
+
+                <ImageView
+                    android:id="@+id/ivWeatherIcon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginVertical="8dp"
+                    tools:src="@drawable/ic_sunny" />
+
+                <TextView
+                    android:id="@+id/tvTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="64sp"
+                    android:textStyle="bold"
+                    tools:text="30°C | 86°F" />
+
+                <!-- Условия (ясно, облачно и т.д.) -->
+                <TextView
+                    android:id="@+id/tvCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:text="Partly cloudy" />
+
+                <!-- Ощущается как -->
+                <TextView
+                    android:id="@+id/tvFeelsLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white_alpha_80"
+                    android:textSize="14sp"
+                    tools:text="Feels like 29°C | 84°F" />
+            </LinearLayout>
+
+            <!-- Сетка с деталями погоды -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:alignmentMode="alignMargins"
+                android:columnCount="2"
+                android:columnOrderPreserved="false"
+                android:rowCount="5"
+                android:useDefaultMargins="true">
+
+                <!-- Влажность -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_humidity"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvHumidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="43%" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/humidity"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Ветер -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_wind"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvWind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="13 km/h S (178°)" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wind"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Давление -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_pressure"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvPressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="1018 hPa | 30.06 in" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pressure"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- УФ-индекс -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_uv"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvUV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="8.6 (Very High)" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uv_index"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Видимость -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_visibility"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvVisibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="10 km | 6 miles" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/visibility"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Облачность -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_cloud"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvCloud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="50%" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cloud_cover"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </GridLayout>
+
+            <!-- Заголовок прогноза на 3 дня -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/forecast"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Контейнер прогноза на 3 дня -->
+            <LinearLayout
+                android:id="@+id/forecastContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <!-- Today -->
                 <include
-                    layout="@layout/item_hourly_forecast"
+                    android:id="@+id/forecastToday"
+                    layout="@layout/item_forecast_day"
                     tools:srcIcon="@drawable/ic_sunny_small"
-                    tools:textHour="15"
-                    tools:textTemp="32°" />
+                    tools:textDate="Today, June 30"
+                    tools:textTemp="33° / 18°" />
 
+                <!-- Tomorrow -->
                 <include
-                    layout="@layout/item_hourly_forecast"
-                    tools:srcIcon="@drawable/ic_sunny_small"
-                    tools:textHour="16"
-                    tools:textTemp="33°" />
-
-                <include
-                    layout="@layout/item_hourly_forecast"
-                    tools:srcIcon="@drawable/ic_sunny_small"
-                    tools:textHour="17"
-                    tools:textTemp="32°" />
-
-                <include
-                    layout="@layout/item_hourly_forecast"
+                    android:id="@+id/forecastTomorrow"
+                    layout="@layout/item_forecast_day"
                     tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                    tools:textHour="18"
-                    tools:textTemp="31°" />
+                    tools:textDate="Tomorrow, July 1"
+                    tools:textTemp="33° / 20°" />
 
+                <!-- Day After -->
                 <include
-                    layout="@layout/item_hourly_forecast"
-                    tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                    tools:textHour="19"
-                    tools:textTemp="30°" />
+                    android:id="@+id/forecastDayAfter"
+                    layout="@layout/item_forecast_day"
+                    tools:srcIcon="@drawable/ic_rain_small"
+                    tools:textDate="Wed, July 2"
+                    tools:textTemp="22° / 14°" />
             </LinearLayout>
-        </HorizontalScrollView>
 
-        <!-- Заголовок астрономических данных -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/sun_moon"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- Сетка с астрономическими данными -->
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:columnOrderPreserved="false"
-            android:rowCount="2"
-            android:useDefaultMargins="true">
-
-            <!-- Восход солнца -->
-            <LinearLayout
-                android:layout_width="0dp"
+            <!-- Заголовок почасового прогноза -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_marginTop="32dp"
+                android:text="@string/hourly_forecast"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_sunrise"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvSunrise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="4:47 AM" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sunrise"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Закат солнца -->
-            <LinearLayout
-                android:layout_width="0dp"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_marginTop="16dp">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_sunset"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvSunset"
+                <LinearLayout
+                    android:id="@+id/hourlyForecastContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="9:21 PM" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sunset"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
+                        tools:textHour="Now"
+                        tools:textTemp="30°" />
 
-            <!-- Восход луны -->
-            <LinearLayout
-                android:layout_width="0dp"
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
+                        tools:textHour="14"
+                        tools:textTemp="31°" />
+
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_sunny_small"
+                        tools:textHour="15"
+                        tools:textTemp="32°" />
+
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_sunny_small"
+                        tools:textHour="16"
+                        tools:textTemp="33°" />
+
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_sunny_small"
+                        tools:textHour="17"
+                        tools:textTemp="32°" />
+
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
+                        tools:textHour="18"
+                        tools:textTemp="31°" />
+
+                    <include
+                        layout="@layout/item_hourly_forecast"
+                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
+                        tools:textHour="19"
+                        tools:textTemp="30°" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Заголовок астрономических данных -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_marginTop="32dp"
+                android:text="@string/sun_moon"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_moonrise"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvMoonrise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="10:39 AM" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/moonrise"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Фаза луны -->
-            <LinearLayout
-                android:layout_width="0dp"
+            <!-- Сетка с астрономическими данными -->
+            <GridLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_marginTop="16dp"
+                android:alignmentMode="alignMargins"
+                android:columnCount="2"
+                android:columnOrderPreserved="false"
+                android:rowCount="2"
+                android:useDefaultMargins="true">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_moon_phase"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/tvMoonPhase"
-                    android:layout_width="wrap_content"
+                <!-- Восход солнца -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    tools:text="Waxing Crescent (24%)" />
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_sunrise"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvSunrise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="4:47 AM" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sunrise"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Закат солнца -->
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/moon_phase"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </GridLayout>
-    </LinearLayout>
-</ScrollView>
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_sunset"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvSunset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="9:21 PM" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sunset"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Восход луны -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_moonrise"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvMoonrise"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="10:39 AM" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/moonrise"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Фаза луны -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_moon_phase"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvMoonPhase"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        tools:text="Waxing Crescent (24%)" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/moon_phase"
+                        android:textColor="@color/white_alpha_80"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </GridLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+</FrameLayout>
