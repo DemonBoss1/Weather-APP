@@ -1,4 +1,4 @@
-package com.empire_mammoth.weatherapp
+package com.empire_mammoth.weatherapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 

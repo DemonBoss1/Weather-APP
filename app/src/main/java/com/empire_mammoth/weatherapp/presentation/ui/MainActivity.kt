@@ -1,10 +1,9 @@
-package com.empire_mammoth.weatherapp
+package com.empire_mammoth.weatherapp.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.empire_mammoth.weatherapp.R
 import com.empire_mammoth.weatherapp.databinding.ActivityMainBinding

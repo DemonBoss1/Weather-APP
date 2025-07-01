@@ -1,4 +1,4 @@
-package com.empire_mammoth.weatherapp
+package com.empire_mammoth.weatherapp.presentation.ui.cities
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.fragment.app.Fragment
 import com.empire_mammoth.weatherapp.databinding.FragmentCitiesBinding
+import com.empire_mammoth.weatherapp.presentation.adapter.CitiesAdapter
+import com.empire_mammoth.weatherapp.presentation.viewmodel.CitiesViewModel
 
 class CitiesFragment : Fragment() {
 

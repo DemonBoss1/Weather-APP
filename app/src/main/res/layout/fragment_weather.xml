@@ -25,8 +25,8 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                app:tint="@color/white"
-                tools:src="@drawable/ic_location" />
+                android:src="@drawable/ic_location"
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/tvLocation"
@@ -323,121 +323,35 @@
 
         <!-- Контейнер прогноза на 3 дня -->
         <LinearLayout
+            android:id="@+id/forecastContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:orientation="vertical">
 
-            <!-- Сегодня -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
+            <!-- Today -->
+            <include
+                android:id="@+id/forecastToday"
+                layout="@layout/item_forecast_day"
+                tools:srcIcon="@drawable/ic_sunny_small"
+                tools:textDate="Today, June 30"
+                tools:textTemp="33° / 18°" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    tools:text="Today, June 30" />
+            <!-- Tomorrow -->
+            <include
+                android:id="@+id/forecastTomorrow"
+                layout="@layout/item_forecast_day"
+                tools:srcIcon="@drawable/ic_partly_cloudy_small"
+                tools:textDate="Tomorrow, July 1"
+                tools:textTemp="33° / 20°" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    tools:src="@drawable/ic_sunny" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    tools:text="33° / 18°" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:gravity="end"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp"
-                    tools:text="Sunny" />
-            </LinearLayout>
-
-            <!-- Завтра -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    tools:text="Tomorrow, July 1" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    tools:src="@drawable/ic_sunny" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    tools:text="33° / 20°" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:gravity="end"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp"
-                    tools:text="Partly Cloudy" />
-            </LinearLayout>
-
-            <!-- Послезавтра -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="12dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    tools:text="Wed, July 2" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    tools:src="@drawable/ic_sunny" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="@color/white"
-                    tools:text="22° / 14°" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:gravity="end"
-                    android:textColor="@color/white_alpha_80"
-                    android:textSize="12sp"
-                    tools:text="Rain (86%)" />
-            </LinearLayout>
+            <!-- Day After -->
+            <include
+                android:id="@+id/forecastDayAfter"
+                layout="@layout/item_forecast_day"
+                tools:srcIcon="@drawable/ic_rain_small"
+                tools:textDate="Wed, July 2"
+                tools:textTemp="22° / 14°" />
         </LinearLayout>
 
         <!-- Заголовок почасового прогноза -->
