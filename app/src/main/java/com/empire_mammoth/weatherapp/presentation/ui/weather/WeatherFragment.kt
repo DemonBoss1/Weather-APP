@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.empire_mammoth.weatherapp.data.models.ForecastDay
 import com.empire_mammoth.weatherapp.data.models.WeatherResponse
@@ -17,9 +20,11 @@ import com.empire_mammoth.weatherapp.databinding.ItemForecastDayBinding
 import com.empire_mammoth.weatherapp.databinding.ItemHourlyForecastBinding
 import com.empire_mammoth.weatherapp.presentation.viewmodel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import com.empire_mammoth.weatherapp.domain.model.WeatherState.WeatherState
 
 @AndroidEntryPoint
 class WeatherFragment : Fragment() {
@@ -38,32 +43,41 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        }
-        viewModel.weatherData.observe(viewLifecycleOwner) { response ->
-            response?.let { updateUI(it) }
-        }
-
-        viewModel.error.observe(viewLifecycleOwner) { error ->
-            error?.let {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        // Загружаем данные
-        viewModel.getWeather("London", 3)
+        collectWeatherState()
+        viewModel.getWeather("London")
     }
+
+    private fun collectWeatherState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.weatherState.collect { state ->
+                    when (state) {
+                        is WeatherState.Loading -> showLoading()
+                        is WeatherState.Success -> {
+                            hideLoading()
+                            updateUI(state.data)
+                        }
+
+                        is WeatherState.Error -> {
+                            hideLoading()
+                            showError(state.message)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
 
     private fun updateUI(response: WeatherResponse) {
         // Заполняем данные о местоположении
         with(response.location) {
             binding.tvLocation.text = name
-            binding.tvRegion.text = "$region, $country"
+            binding.tvRegion.text = "$region, \n$country"
         }
 
         // Заполняем текущую погоду
@@ -80,16 +94,17 @@ class WeatherFragment : Fragment() {
 
             binding.tvTemperature.text = "${tempC.toInt()}°C | ${tempF.toInt()}°F"
             binding.tvCondition.text = condition.text
-            binding.tvFeelsLike.text = "Feels like ${feelslikeC.toInt()}°C | ${feelslikeF.toInt()}°F"
+            binding.tvFeelsLike.text =
+                "Feels like ${feelslikeC.toInt()}°C | ${feelslikeF.toInt()}°F"
         }
 
         // Заполняем детали погоды
         with(response.current) {
             binding.tvHumidity.text = "$humidity%"
-            binding.tvWind.text = "$windKph km/h $windDir ($windDegree°)"
-            binding.tvPressure.text = "$pressureMb hPa | ${"%.2f".format(pressureIn)} in"
+            binding.tvWind.text = "$windKph km/h \n$windDir ($windDegree°)"
+            binding.tvPressure.text = "$pressureMb hPa \n${"%.2f".format(pressureIn)} in"
             binding.tvUV.text = "$uv (${getUvIndexLevel(uv)})"
-            binding.tvVisibility.text = "$visKm km | ${"%.1f".format(visMiles)} miles"
+            binding.tvVisibility.text = "$visKm km \n ${"%.1f".format(visMiles)} miles"
             binding.tvCloud.text = "$cloud%"
         }
 
@@ -99,7 +114,11 @@ class WeatherFragment : Fragment() {
             when (index) {
                 0 -> setupForecastDay(binding.forecastToday.root, forecastDay, "Today")
                 1 -> setupForecastDay(binding.forecastTomorrow.root, forecastDay, "Tomorrow")
-                2 -> setupForecastDay(binding.forecastDayAfter.root, forecastDay, getDayName(forecastDay.date))
+                2 -> setupForecastDay(
+                    binding.forecastDayAfter.root,
+                    forecastDay,
+                    getDayName(forecastDay.date)
+                )
             }
         }
 
@@ -122,8 +141,9 @@ class WeatherFragment : Fragment() {
         val date = dateFormat.parse(forecastDay.date)
         val displayFormat = SimpleDateFormat("MMMM d", Locale.getDefault())
 
-        dayBinding.tvDateItemForecastDay.text = "$dayName, ${displayFormat.format(date)}"
-        dayBinding.tvTempItemForecastDay.text = "${forecastDay.day.maxTempC.toInt()}° / ${forecastDay.day.minTempC.toInt()}°"
+        dayBinding.tvDateItemForecastDay.text = "$dayName, \n${displayFormat.format(date)}"
+        dayBinding.tvTempItemForecastDay.text =
+            "${forecastDay.day.maxTempC.toInt()}° / ${forecastDay.day.minTempC.toInt()}°"
         dayBinding.tvConditionItemForecastDay.text = forecastDay.day.condition.text
 
         // Загружаем иконку

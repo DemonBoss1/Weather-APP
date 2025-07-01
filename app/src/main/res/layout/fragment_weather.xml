@@ -59,7 +59,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -122,7 +122,8 @@
                 <!-- Влажность -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -138,7 +139,9 @@
                     <TextView
                         android:id="@+id/tvHumidity"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -156,6 +159,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -171,7 +175,9 @@
                     <TextView
                         android:id="@+id/tvWind"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -189,6 +195,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -204,7 +211,9 @@
                     <TextView
                         android:id="@+id/tvPressure"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -221,7 +230,8 @@
                 <!-- УФ-индекс -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -237,7 +247,9 @@
                     <TextView
                         android:id="@+id/tvUV"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -255,6 +267,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -270,7 +283,9 @@
                     <TextView
                         android:id="@+id/tvVisibility"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -287,7 +302,8 @@
                 <!-- Облачность -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_gravity="fill_horizontal"
                     android:gravity="center_horizontal"
@@ -303,7 +319,9 @@
                     <TextView
                         android:id="@+id/tvCloud"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -469,7 +487,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:text="4:47 AM" />
 
                     <TextView
@@ -502,7 +520,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:text="9:21 PM" />
 
                     <TextView
@@ -535,7 +553,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:text="10:39 AM" />
 
                     <TextView
@@ -568,7 +586,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:text="Waxing Crescent (24%)" />
 
                     <TextView

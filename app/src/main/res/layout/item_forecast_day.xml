@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingVertical="12dp"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp">
 
     <!-- Дата и день недели -->
     <TextView
@@ -33,7 +34,7 @@
         android:id="@+id/tvTempItemForecastDay"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:gravity="end"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -44,7 +45,8 @@
         android:id="@+id/tvConditionItemForecastDay"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
+        android:layout_marginHorizontal="8dp"
+        android:layout_weight="1"
         android:gravity="end"
         android:textColor="@color/white_alpha_80"
         android:textSize="14sp"

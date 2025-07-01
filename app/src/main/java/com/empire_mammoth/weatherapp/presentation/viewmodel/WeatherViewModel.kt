@@ -1,41 +1,38 @@
 package com.empire_mammoth.weatherapp.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.empire_mammoth.weatherapp.BuildConfig
 import com.empire_mammoth.weatherapp.data.api.WeatherApiService
-import com.empire_mammoth.weatherapp.data.models.WeatherResponse
+import com.empire_mammoth.weatherapp.domain.model.WeatherState.WeatherState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val weatherApi: WeatherApiService
 ) : ViewModel() {
-    private val _weatherData = MutableLiveData<WeatherResponse>()
-    val weatherData: LiveData<WeatherResponse> = _weatherData
+    private val _weatherState = MutableStateFlow<WeatherState>(WeatherState.Loading)
+    val weatherState: StateFlow<WeatherState> = _weatherState.asStateFlow()
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
-    fun getWeather(location: String, days: Int) {
+    fun getWeather(location: String) {
         viewModelScope.launch {
-            _loading.value = true
+            _weatherState.value = WeatherState.Loading
             try {
                 val response = weatherApi.getWeatherForecast(
                     apiKey = BuildConfig.WEATHER_API_KEY,
                     location = location,
-                    days = days
+                    days = 3
                 )
-                _weatherData.value = response
+                _weatherState.value = WeatherState.Success(response)
             } catch (e: Exception) {
-                _error.value = "Failed to load weather data: ${e.message}"
-            } finally {
-                _loading.value = false
+                _weatherState.value = WeatherState.Error(
+                    message = "Ошибка загрузки: ${e.message ?: "Неизвестная ошибка"}"
+                )
             }
         }
     }
