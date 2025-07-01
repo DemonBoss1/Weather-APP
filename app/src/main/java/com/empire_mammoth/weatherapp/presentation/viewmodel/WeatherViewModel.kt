@@ -4,27 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.empire_mammoth.weatherapp.BuildConfig
 import com.empire_mammoth.weatherapp.data.api.WeatherApiService
 import com.empire_mammoth.weatherapp.data.models.WeatherResponse
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.OkHttpClient
-import com.empire_mammoth.weatherapp.BuildConfig
+import javax.inject.Inject
 
-class WeatherViewModel() : ViewModel() {
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl("https://api.weatherapi.com/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(OkHttpClient.Builder().build())
-            .build()
-    }
-
-    val weatherApi: WeatherApiService by lazy {
-        retrofit.create(WeatherApiService::class.java)
-    }
-
+class WeatherViewModel @Inject constructor(
+    private val weatherApi: WeatherApiService
+) : ViewModel() {
     private val _weatherData = MutableLiveData<WeatherResponse>()
     val weatherData: LiveData<WeatherResponse> = _weatherData
 

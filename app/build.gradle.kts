@@ -3,6 +3,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 val localProperties = Properties().apply {
@@ -50,6 +53,9 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.dagger:hilt-android:2.56.2")
+    kapt("com.google.dagger:hilt-android-compiler:2.56.2")
+
     implementation("com.github.bumptech.glide:glide:4.11.0")
 
     implementation("com.squareup.retrofit2:retrofit:3.0.0")

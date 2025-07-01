@@ -16,10 +16,12 @@ import com.empire_mammoth.weatherapp.databinding.FragmentWeatherBinding
 import com.empire_mammoth.weatherapp.databinding.ItemForecastDayBinding
 import com.empire_mammoth.weatherapp.databinding.ItemHourlyForecastBinding
 import com.empire_mammoth.weatherapp.presentation.viewmodel.WeatherViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
     private lateinit var binding: FragmentWeatherBinding
     private val viewModel: WeatherViewModel by viewModels()
