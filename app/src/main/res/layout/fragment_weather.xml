@@ -40,19 +40,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="Нет данных"
                     android:textColor="@color/white"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    tools:text="London, United Kingdom" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvRegion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:text="Неизвестный регион"
                     android:textColor="@color/white_alpha_80"
-                    android:textSize="14sp"
-                    tools:text="City of London, Greater London" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Секция текущей погоды -->
@@ -67,25 +67,25 @@
                     android:id="@+id/tvDateTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Данные не загружены"
                     android:textColor="@color/white_alpha_80"
-                    android:textSize="14sp"
-                    tools:text="June 30, 1:25 PM | Last updated: 1:15 PM" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/ivWeatherIcon"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginVertical="8dp"
-                    tools:src="@drawable/ic_sunny" />
+                    android:src="@drawable/ic_unknown" />
 
                 <TextView
                     android:id="@+id/tvTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="--°C | --°F"
                     android:textColor="@color/white"
                     android:textSize="64sp"
-                    android:textStyle="bold"
-                    tools:text="30°C | 86°F" />
+                    android:textStyle="bold" />
 
                 <!-- Условия (ясно, облачно и т.д.) -->
                 <TextView
@@ -93,9 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:text="Нет данных"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    tools:text="Partly cloudy" />
+                    android:textSize="20sp" />
 
                 <!-- Ощущается как -->
                 <TextView
@@ -103,9 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:text="Feels like --°C | --°F"
                     android:textColor="@color/white_alpha_80"
-                    android:textSize="14sp"
-                    tools:text="Feels like 29°C | 84°F" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!-- Сетка с деталями погоды -->
@@ -143,9 +143,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="--%"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="43%" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -179,9 +179,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="-- km/h"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="13 km/h S (178°)" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -215,9 +215,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="-- hPa | -- in"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="1018 hPa | 30.06 in" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -251,9 +251,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="--"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="8.6 (Very High)" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -287,9 +287,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="-- km | -- miles"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="10 km | 6 miles" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -323,9 +323,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="8dp"
+                        android:text="--%"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="50%" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -357,26 +357,17 @@
                 <!-- Today -->
                 <include
                     android:id="@+id/forecastToday"
-                    layout="@layout/item_forecast_day"
-                    tools:srcIcon="@drawable/ic_sunny_small"
-                    tools:textDate="Today, June 30"
-                    tools:textTemp="33° / 18°" />
+                    layout="@layout/item_forecast_day" />
 
                 <!-- Tomorrow -->
                 <include
                     android:id="@+id/forecastTomorrow"
-                    layout="@layout/item_forecast_day"
-                    tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                    tools:textDate="Tomorrow, July 1"
-                    tools:textTemp="33° / 20°" />
+                    layout="@layout/item_forecast_day" />
 
                 <!-- Day After -->
                 <include
                     android:id="@+id/forecastDayAfter"
-                    layout="@layout/item_forecast_day"
-                    tools:srcIcon="@drawable/ic_rain_small"
-                    tools:textDate="Wed, July 2"
-                    tools:textTemp="22° / 14°" />
+                    layout="@layout/item_forecast_day" />
             </LinearLayout>
 
             <!-- Заголовок почасового прогноза -->
@@ -401,46 +392,10 @@
                     android:orientation="horizontal">
 
                     <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                        tools:textHour="Now"
-                        tools:textTemp="30°" />
+                        layout="@layout/item_hourly_forecast" />
 
                     <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                        tools:textHour="14"
-                        tools:textTemp="31°" />
-
-                    <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_sunny_small"
-                        tools:textHour="15"
-                        tools:textTemp="32°" />
-
-                    <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_sunny_small"
-                        tools:textHour="16"
-                        tools:textTemp="33°" />
-
-                    <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_sunny_small"
-                        tools:textHour="17"
-                        tools:textTemp="32°" />
-
-                    <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                        tools:textHour="18"
-                        tools:textTemp="31°" />
-
-                    <include
-                        layout="@layout/item_hourly_forecast"
-                        tools:srcIcon="@drawable/ic_partly_cloudy_small"
-                        tools:textHour="19"
-                        tools:textTemp="30°" />
+                        layout="@layout/item_hourly_forecast" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -486,9 +441,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:text="--:--"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        tools:text="4:47 AM" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -519,9 +474,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:text="--:--"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        tools:text="9:21 PM" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -552,9 +507,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:text="--:--"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        tools:text="10:39 AM" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -585,9 +540,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:text="Нет данных"
                         android:textColor="@color/white"
-                        android:textSize="14sp"
-                        tools:text="Waxing Crescent (24%)" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"

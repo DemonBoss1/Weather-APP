@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
+import com.empire_mammoth.weatherapp.R
 import com.empire_mammoth.weatherapp.data.models.ForecastDay
 import com.empire_mammoth.weatherapp.data.models.WeatherResponse
 import com.empire_mammoth.weatherapp.data.models.HourForecast
@@ -43,8 +44,63 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Устанавливаем значения по умолчанию
+        setDefaultValues()
+
         collectWeatherState()
         viewModel.getWeather("London")
+    }
+
+    private fun setDefaultValues() {
+        // Местоположение
+        binding.tvLocation.text = "Нет данных"
+        binding.tvRegion.text = "Неизвестный регион"
+
+        // Текущая погода
+        binding.tvDateTime.text = "Данные не загружены"
+        binding.tvTemperature.text = "--°C | --°F"
+        binding.tvCondition.text = "Нет данных"
+        binding.tvFeelsLike.text = "Feels like --°C | --°F"
+
+        // Детали погоды
+        binding.tvHumidity.text = "--%"
+        binding.tvWind.text = "-- km/h"
+        binding.tvPressure.text = "-- hPa | -- in"
+        binding.tvUV.text = "--"
+        binding.tvVisibility.text = "-- km | -- miles"
+        binding.tvCloud.text = "--%"
+
+        // Астрономические данные
+        binding.tvSunrise.text = "--:--"
+        binding.tvSunset.text = "--:--"
+        binding.tvMoonrise.text = "--:--"
+        binding.tvMoonPhase.text = "Нет данных"
+
+        // Прогноз на 3 дня
+        setupDefaultForecast(binding.forecastToday.root, "Today")
+        setupDefaultForecast(binding.forecastTomorrow.root, "Tomorrow")
+        setupDefaultForecast(binding.forecastDayAfter.root, "--")
+
+        // Почасовой прогноз
+        setupDefaultHourlyForecast()
+    }
+
+    private fun setupDefaultForecast(view: View, dayName: String) {
+        val dayBinding = ItemForecastDayBinding.bind(view)
+        dayBinding.tvDateItemForecastDay.text = dayName
+        dayBinding.tvTempItemForecastDay.text = "--° / --°"
+        dayBinding.tvConditionItemForecastDay.text = "Нет данных"
+        dayBinding.ivWeatherIconItemForecastDay.setImageResource(R.drawable.ic_unknown)
+    }
+
+    private fun setupDefaultHourlyForecast() {
+        binding.hourlyForecastContainer.removeAllViews()
+
+        val hourBinding = ItemHourlyForecastBinding.inflate(layoutInflater)
+        hourBinding.tvHour.text = "Now"
+        hourBinding.tvHourlyTemp.text = "--°"
+        hourBinding.ivHourlyIcon.setImageResource(R.drawable.ic_unknown)
+        binding.hourlyForecastContainer.addView(hourBinding.root)
     }
 
     private fun collectWeatherState() {
@@ -61,6 +117,7 @@ class WeatherFragment : Fragment() {
                         is WeatherState.Error -> {
                             hideLoading()
                             showError(state.message)
+                            setDefaultValues() // Устанавливаем значения по умолчанию при ошибке
                         }
                     }
                 }
@@ -71,7 +128,6 @@ class WeatherFragment : Fragment() {
     private fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
-
 
     private fun updateUI(response: WeatherResponse) {
         // Заполняем данные о местоположении
@@ -87,7 +143,7 @@ class WeatherFragment : Fragment() {
                 .format(Date(lastUpdatedEpoch * 1000))
             binding.tvDateTime.text = "$lastUpdated | Last updated: ${lastUpdated.substring(11)}"
 
-            // Загружаем иконку погоды (используем Glide или другой библиотеки)
+            // Загружаем иконку погоды
             Glide.with(this@WeatherFragment)
                 .load("https:${condition.icon}")
                 .into(binding.ivWeatherIcon)
