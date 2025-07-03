@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +17,14 @@ import com.empire_mammoth.weatherapp.databinding.FragmentCityListBinding
 import com.empire_mammoth.weatherapp.domain.model.CityListState
 import com.empire_mammoth.weatherapp.presentation.adapter.CityAdapter
 import com.empire_mammoth.weatherapp.presentation.viewmodel.CityListViewModel
+import com.empire_mammoth.weatherapp.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CityListFragment : Fragment() {
 
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentCityListBinding
     private val viewModel: CityListViewModel by viewModels()
     private lateinit var adapter: CityAdapter
@@ -40,6 +43,7 @@ class CityListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = CityAdapter { city ->
+            mainViewModel.selectCity(city)
             viewModel.selectCity(city.id)
             findNavController().navigateUp()
         }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import com.empire_mammoth.weatherapp.domain.model.DailyForecastUI
 import com.empire_mammoth.weatherapp.domain.model.HourlyForecastUI
 import com.empire_mammoth.weatherapp.domain.model.WeatherDataUI
 import com.empire_mammoth.weatherapp.domain.model.WeatherState.WeatherState
+import com.empire_mammoth.weatherapp.presentation.viewmodel.MainViewModel
 import com.empire_mammoth.weatherapp.presentation.viewmodel.WeatherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -30,6 +32,7 @@ import java.util.Locale
 class WeatherFragment : Fragment() {
     private lateinit var binding: FragmentWeatherBinding
     private val viewModel: WeatherViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +50,6 @@ class WeatherFragment : Fragment() {
         setDefaultValues()
 
         collectWeatherState()
-        viewModel.getWeather("London")
     }
 
     private fun setDefaultValues() {
@@ -100,23 +102,39 @@ class WeatherFragment : Fragment() {
 
     private fun collectWeatherState() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.weatherState.collect { state ->
-                    when (state) {
-                        is WeatherState.Loading -> showLoading()
-                        is WeatherState.Success -> {
-                            hideLoading()
-                            updateUI(state.data)
-                        }
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.weatherState.collect { state ->
+                        when (state) {
+                            is WeatherState.Loading -> showLoading()
+                            is WeatherState.Success -> {
+                                hideLoading()
+                                updateUI(state.data)
+                            }
 
-                        is WeatherState.Error -> {
-                            hideLoading()
-                            showError(state.message)
-                            setDefaultValues() // Устанавливаем значения по умолчанию при ошибке
+                            is WeatherState.Error -> {
+                                hideLoading()
+                                showError(state.message)
+                                setDefaultValues() // Устанавливаем значения по умолчанию при ошибке
+                            }
                         }
                     }
                 }
             }
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    mainViewModel.selectedCity.collect{
+                        viewModel.getWeather(it.name)
+                        scrollToTop()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun scrollToTop() {
+        binding.scrollView.post {
+            binding.scrollView.smoothScrollTo(0, 0)
         }
     }
 
