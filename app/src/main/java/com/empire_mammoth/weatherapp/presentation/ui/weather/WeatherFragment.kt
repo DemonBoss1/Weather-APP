@@ -46,10 +46,19 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Устанавливаем значения по умолчанию
+        setupSwipeRefresh()
+
         setDefaultValues()
 
         collectWeatherState()
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.currentCity?.let { city ->
+                viewModel.getWeather(city)
+            }
+        }
     }
 
     private fun setDefaultValues() {
@@ -123,8 +132,10 @@ class WeatherFragment : Fragment() {
             launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     mainViewModel.selectedCity.collect{
-                        viewModel.getWeather(it.name)
-                        scrollToTop()
+                        if (viewModel.currentCity != it.name) {
+                            viewModel.getWeather(it.name)
+                            scrollToTop()
+                        }
                     }
                 }
             }
@@ -244,12 +255,12 @@ class WeatherFragment : Fragment() {
     }
 
     private fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.scrollView.visibility = View.GONE
+        binding.swipeRefreshLayout.isRefreshing = true
+        //binding.scrollView.visibility = View.GONE
     }
 
     private fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-        binding.scrollView.visibility = View.VISIBLE
+        binding.swipeRefreshLayout.isRefreshing = false
+        //binding.scrollView.visibility = View.VISIBLE
     }
 }

@@ -53,7 +53,9 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.dagger:hilt-android:2.56.2")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    implementation("com.google.dagger:hilt-android:2.56.2")
     implementation(libs.androidx.lifecycle.common.jvm)
     kapt("com.google.dagger:hilt-android-compiler:2.56.2")
 
