@@ -15,8 +15,8 @@
     <!-- Список городов -->
     <fragment
         android:id="@+id/citiesFragment"
-        android:name="com.empire_mammoth.weatherapp.presentation.ui.cities.CitiesFragment"
+        android:name="com.empire_mammoth.weatherapp.presentation.ui.cities.CityListFragment"
         android:label="Города"
-        tools:layout="@layout/fragment_cities" />
+        tools:layout="@layout/fragment_city_list" />
 
 </navigation>
