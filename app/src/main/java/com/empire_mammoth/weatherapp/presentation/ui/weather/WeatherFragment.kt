@@ -115,7 +115,6 @@ class WeatherFragment : Fragment() {
                             is WeatherState.Error -> {
                                 hideLoading()
                                 showError(state.message)
-                                setDefaultValues() // Устанавливаем значения по умолчанию при ошибке
                             }
                         }
                     }
