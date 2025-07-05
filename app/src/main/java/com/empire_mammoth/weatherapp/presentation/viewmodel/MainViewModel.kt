@@ -11,10 +11,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
 
-    private val _selectedCity = MutableStateFlow<City?>(null)
-    val selectedCity: StateFlow<City?> = _selectedCity.asStateFlow()
+    private val _selectedCity = MutableStateFlow<String?>(null)
+    val selectedCity: StateFlow<String?> = _selectedCity.asStateFlow()
 
-    fun selectCity(city: City) {
+    fun selectCity(city: String) {
         _selectedCity.value = city
     }
 }

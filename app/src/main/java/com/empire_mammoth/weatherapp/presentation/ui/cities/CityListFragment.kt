@@ -43,7 +43,7 @@ class CityListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = CityAdapter { city ->
-            mainViewModel.selectCity(city)
+            mainViewModel.selectCity(city.name)
             viewModel.selectCity(city.id)
             findNavController().navigateUp()
         }

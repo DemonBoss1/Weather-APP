@@ -27,10 +27,10 @@
 
             <!-- Секция с местоположением -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -38,6 +38,12 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_location"
                     app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                 <TextView
                     android:id="@+id/tvLocation"
@@ -53,10 +59,23 @@
                     android:id="@+id/tvRegion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="160dp"
                     android:layout_marginStart="8dp"
                     android:text="Неизвестный регион"
                     android:textColor="@color/white_alpha_80"
                     android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnSetDefault"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_star_outline"
+                    android:contentDescription="set_default_city"
+                    app:tint="@color/white_alpha_80" />
             </LinearLayout>
 
             <!-- Секция текущей погоды -->

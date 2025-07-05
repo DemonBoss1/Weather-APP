@@ -51,6 +51,8 @@ class WeatherFragment : Fragment() {
         //setDefaultValues()
 
         collectWeatherState()
+
+        binding.btnSetDefault.setOnClickListener { viewModel.setDefaultCity() }
     }
 
     private fun setupSwipeRefresh() {
@@ -131,12 +133,26 @@ class WeatherFragment : Fragment() {
             }
             launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    mainViewModel.selectedCity.collect{
+                    mainViewModel.selectedCity.collect {
                         it?.let {
-                            if (viewModel.currentCity != it.name) {
-                                viewModel.getWeather(it.name)
+                            if (viewModel.currentCity != it) {
+                                viewModel.getWeather(it)
                                 scrollToTop()
                             }
+                        }
+                    }
+                }
+            }
+            launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.defaultCity.collect {
+                        it?.let {
+                            if (mainViewModel.selectedCity.value == null)
+                                mainViewModel.selectCity(it)
+                            if (mainViewModel.selectedCity.value == it)
+                                binding.btnSetDefault.setImageResource(R.drawable.ic_star_filled)
+                            else
+                                binding.btnSetDefault.setImageResource(R.drawable.ic_star_outline)
                         }
                     }
                 }
