@@ -29,11 +29,12 @@ class WeatherViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-        getLastWeatherUseCase()?.let { (_, cachedWeather) ->
-            _weatherState.value = WeatherState.Success(cachedWeather)
-            return@let
-        }
+            getLastWeatherUseCase()?.let {(cachedCity, cachedWeather) ->
+                _weatherState.value = WeatherState.Success(cachedWeather)
+                currentCity = cachedCity
             }
+            getWeather(currentCity ?: "Moscow")
+        }
     }
 
     fun getWeather(location: String) {
