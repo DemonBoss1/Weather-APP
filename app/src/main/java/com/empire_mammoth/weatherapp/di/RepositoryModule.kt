@@ -1,8 +1,10 @@
 package com.empire_mammoth.weatherapp.di
 
 import com.empire_mammoth.weatherapp.data.repository.CityRepositoryImpl
+import com.empire_mammoth.weatherapp.data.repository.LastWeatherRepositoryImpl
 import com.empire_mammoth.weatherapp.data.repository.WeatherRepositoryImpl
 import com.empire_mammoth.weatherapp.domain.repository.CityRepository
+import com.empire_mammoth.weatherapp.domain.repository.LastWeatherRepository
 import com.empire_mammoth.weatherapp.domain.repository.WeatherRepository
 import dagger.Binds
 import dagger.Module
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindWeatherRepository(
         repository: WeatherRepositoryImpl
     ): WeatherRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindLastWeatherRepository(
+        repository: LastWeatherRepositoryImpl
+    ): LastWeatherRepository
 }
