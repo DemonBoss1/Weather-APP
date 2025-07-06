@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
 
 @AndroidEntryPoint
 class WeatherFragment : Fragment() {
@@ -210,7 +211,7 @@ class WeatherFragment : Fragment() {
         }
 
         // Заполняем почасовой прогноз
-        setupHourlyForecast(weatherData.hourlyForecast)
+        setupHourlyForecast(weatherData.hourlyForecast, weatherData.current.lastUpdated.substring(11, 13))
 
         // Заполняем астрономические данные
         with(weatherData.astronomy) {
@@ -238,18 +239,20 @@ class WeatherFragment : Fragment() {
             .into(dayBinding.ivWeatherIconItemForecastDay)
     }
 
-    private fun setupHourlyForecast(hours: List<HourlyForecastUI>) {
+    private fun setupHourlyForecast(hours: List<HourlyForecastUI>, currentHour:String) {
         binding.hourlyForecastContainer.removeAllViews()
 
-        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        //val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        var isFinish = false
         val relevantHours = hours.filter {
-            it.time.substring(0, 2).toInt() >= currentHour
+            if(!isFinish) isFinish = it.time.substring(0, 2).toInt() >= currentHour.toInt()
+            isFinish
         }.take(12)
 
         relevantHours.forEach { hour ->
             val hourBinding = ItemHourlyForecastBinding.inflate(layoutInflater)
 
-            hourBinding.tvHour.text = if (hour.time.substring(0, 2).toInt() == currentHour) {
+            hourBinding.tvHour.text = if (hour.time.substring(0, 2).toInt() == currentHour.toInt()) {
                 "Now"
             } else {
                 hour.time
